@@ -26,7 +26,8 @@ const Home = (props) => {
   };
 
   useEffect(() => {
-    userNameRef.current.value = cookies.userName;
+    userNameRef.current.value = cookies.userName || "";
+    userNameRef.current.focus();
   });
 
   return (
