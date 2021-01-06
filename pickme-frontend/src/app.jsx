@@ -8,7 +8,7 @@ import Quiz from "./components/quiz/quiz";
 
 function App() {
   return (
-    <div>
+    <div className={styles.app}>
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
