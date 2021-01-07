@@ -8,7 +8,7 @@ const Header = memo(({ onLogout }) => (
         Logout
       </button>
     )}
-    <h1 className={styles.title}>Pick You♥I</h1>
+    <h1 className={styles.title}>Pick! You♥I</h1>
   </header>
 ));
 

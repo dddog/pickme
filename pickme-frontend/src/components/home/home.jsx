@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Footer from "../footer/footer";
-import Header from "../header/header";
+
 import styles from "./home.module.css";
 
 const Home = (props) => {
@@ -31,8 +31,7 @@ const Home = (props) => {
   });
 
   return (
-    <section className={styles.home}>
-      <Header />
+    <>
       <div className={styles.container}>
         <div className={styles.content}>
           <h1 className={styles.title}>나를 맞춰줘!</h1>
@@ -44,7 +43,7 @@ const Home = (props) => {
                   className={styles.input}
                   ref={userNameRef}
                   type="text"
-                  placeholder="이름을 입력하세요"
+                  placeholder="별명을 입력하세요"
                 />
               </li>
               <li className={styles.item}>
@@ -56,8 +55,7 @@ const Home = (props) => {
           </form>
         </div>
       </div>
-      <Footer />
-    </section>
+    </>
   );
 };
 
