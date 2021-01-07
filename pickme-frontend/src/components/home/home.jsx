@@ -1,11 +1,10 @@
 import React, { useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import Footer from "../footer/footer";
 
 import styles from "./home.module.css";
 
-const Home = (props) => {
+const Home = ({ apiService }) => {
   const history = useHistory();
 
   const userNameRef = useRef();
@@ -17,11 +16,16 @@ const Home = (props) => {
 
     const userName = userNameRef.current.value;
     setCookie("userName", userName, { maxAge: 36000000 });
-    history.push({
-      pathname: "/quiz",
-      state: {
-        userName: userName,
-      },
+
+    const quiz = apiService.getQuiz();
+    quiz.then((quiz) => {
+      history.push({
+        pathname: `/quiz/${quiz.key}/1`, // quiz 첫번째 문제
+        state: {
+          userName: userName,
+          quizName: quiz.name,
+        },
+      });
     });
   };
 

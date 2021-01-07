@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./user.module.css";
 
-const User = (props) => <h1>User</h1>;
+const User = (props) => <h1 className={styles.h1}>User</h1>;
 
 export default User;

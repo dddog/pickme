@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const Quiz = (props) => {
+const Quiz = ({ apiService }) => {
   const historyState = useHistory().location.state;
-  const [userName, setUserName] = useState(
-    historyState && historyState.userName
-  );
+  const [userName] = useState(historyState && historyState.userName);
+  const [quizName] = useState(historyState && historyState.quizName);
+  // const [quizName, setQuizName] = useState("");
 
-  return <h1>Quiz {userName}</h1>;
+  return (
+    <h1>
+      {userName}님의 {quizName}
+    </h1>
+  );
 };
 
 export default Quiz;

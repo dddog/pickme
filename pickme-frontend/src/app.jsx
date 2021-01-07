@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./app.module.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
@@ -8,7 +8,7 @@ import Home from "./components/home/home";
 import User from "./components/user/user";
 import Quiz from "./components/quiz/quiz";
 
-function App() {
+function App({ apiService }) {
   return (
     <div className={styles.app}>
       <section className={styles.section}>
@@ -16,9 +16,12 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home apiService={apiService} />
             </Route>
-            <Route path="/quiz" component={Quiz}></Route>
+            <Route
+              path="/quiz"
+              component={() => <Quiz apiService={apiService} />}
+            ></Route>
             <Route path="/user">
               <User />
             </Route>
