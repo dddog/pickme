@@ -10,3 +10,11 @@
   color: makerWhite;
   margin: 0.5rem;
 }
+
+.text {
+  padding-right: 1em;
+}
+.contact {
+  text-decoration: none;
+  color: makerWhite;
+}
