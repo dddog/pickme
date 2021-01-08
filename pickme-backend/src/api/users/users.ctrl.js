@@ -1,4 +1,3 @@
-const users = require(".");
 const firebaseDatabase = require("../../service/firebase");
 
 exports.get = async (ctx, next) => {
