@@ -1,16 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-const Quiz = ({ apiService }) => {
+const Quiz = ({ match, apiService }) => {
   const historyState = useHistory().location.state;
   const [userName] = useState(historyState && historyState.userName);
   const [quizName] = useState(historyState && historyState.quizName);
-  // const [quizName, setQuizName] = useState("");
+  const [images, setImages] = useState([]);
 
+  const { quizId, pickNo } = match.params;
+  useEffect(() => {
+    apiService.getPick(quizId, pickNo).then((pick) => {
+      setImages([pick.images[0], pick.images[1]]);
+      // setImages(pick.images);
+    });
+  }, [apiService]);
+  console.log(images);
   return (
-    <h1>
-      {userName}님의 {quizName}
-    </h1>
+    <div>
+      <h1>
+        {userName}님의 {quizName}
+      </h1>
+      {images.map((img) => (
+        <img src={img.fileUrl}></img>
+      ))}
+    </div>
   );
 };
 
