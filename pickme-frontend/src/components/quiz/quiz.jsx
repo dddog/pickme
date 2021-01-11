@@ -28,9 +28,7 @@ const Quiz = ({ match, apiService }) => {
     const r = results;
     r.push(selectedKey);
     setResults(r);
-    console.log(
-      `selected : ${selectedPickNo},  results : ${results}, length : ${results.length}`
-    );
+    // console.log(`selected : ${selectedPickNo},  results : ${results}, length : ${results.length}`);
     if (results.length === totalCnt) {
       history.push({
         pathname: `/user`,
