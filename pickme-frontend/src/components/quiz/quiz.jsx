@@ -5,6 +5,7 @@ import styles from "./quiz.module.css";
 
 const Quiz = ({ match, apiService }) => {
   const historyState = useHistory().location.state;
+  const history = useHistory();
   const [userName] = useState(historyState && historyState.userName);
   const [quizName] = useState(historyState && historyState.quizName);
   const [totalCnt] = useState(historyState && historyState.totalCnt);
@@ -14,32 +15,34 @@ const Quiz = ({ match, apiService }) => {
 
   const { quizId } = match.params;
   useEffect(() => {
-    setResults([]);
-    setSelectedPickNo(0);
-    console.log(`${quizId}/${quizName} total cnt : ${totalCnt}`);
+    // setResults([]);
+    // setSelectedPickNo(0);
+    // console.log(`${quizId}/${quizName} total cnt : ${totalCnt}`);
     apiService.getPick(quizId, selectedPickNo).then((pick) => {
-      console.log(`getpick1>>>${pick}`);
+      // console.log(`getpick1>>>${pick}`);
       setImages(pick == null ? [] : [pick.images[0], pick.images[1]]);
     });
-  }, [apiService, quizId, quizName, totalCnt]);
+  }, [apiService, quizId, quizName, selectedPickNo, totalCnt]);
 
   const onCickPick = (selectedKey) => {
     const r = results;
-    setResults([r.push(selectedKey)]);
+    r.push(selectedKey);
+    setResults(r);
     console.log(
       `selected : ${selectedPickNo},  results : ${results}, length : ${results.length}`
     );
     if (results.length === totalCnt) {
-      console.log(`결과 저장 처리`);
+      history.push({
+        pathname: `/user`,
+      });
       return;
     } else {
-      console.log(`selectedPickNo>>>${selectedPickNo}`);
       const pickNo = selectedPickNo;
       setSelectedPickNo(pickNo + 1);
-      apiService.getPick(quizId, selectedPickNo).then((pick) => {
-        console.log(`getpick2>>>${pick.images[0]}`);
-        setImages(pick == null ? [] : [pick.images[0], pick.images[1]]);
-      });
+      // apiService.getPick(quizId, selectedPickNo).then((pick) => {
+      //   console.log(`getpick2>>>${pick.images[0]}`);
+      //   setImages(pick == null ? [] : [pick.images[0], pick.images[1]]);
+      // });
     }
   };
   return (
