@@ -1,0 +1,18 @@
+.quiz {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1em;
+  color: makerGreen;
+}
+
+.pick {
+  width: 100%;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+}

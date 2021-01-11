@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import Pick from "../pick/pick";
+import styles from "./quiz.module.css";
 
 const Quiz = ({ match, apiService }) => {
   const historyState = useHistory().location.state;
@@ -13,17 +15,18 @@ const Quiz = ({ match, apiService }) => {
       setImages([pick.images[0], pick.images[1]]);
       // setImages(pick.images);
     });
-  }, [apiService]);
-  console.log(images);
+  }, [apiService, pickNo, quizId]);
   return (
-    <div>
-      <h1>
+    <section className={styles.quiz}>
+      <h1 className={styles.title}>
         {userName}님의 {quizName}
       </h1>
-      {images.map((img) => (
-        <img src={img.fileUrl}></img>
-      ))}
-    </div>
+      <ul className={styles.pick}>
+        {images.map((img) => (
+          <Pick img={img} />
+        ))}
+      </ul>
+    </section>
   );
 };
 

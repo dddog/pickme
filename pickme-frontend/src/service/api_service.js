@@ -17,7 +17,6 @@ class ApiService {
   }
 
   async getPick(quizId, pickNo) {
-    console.log(`getPick(${quizId}, ${pickNo})`);
     const requestOptions = {
       method: "GET",
       redirect: "follow",

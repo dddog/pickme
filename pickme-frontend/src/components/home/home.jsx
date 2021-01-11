@@ -20,7 +20,7 @@ const Home = ({ apiService }) => {
     const quiz = apiService.getQuiz();
     quiz.then((quiz) => {
       history.push({
-        pathname: `/quiz/${quiz.key}/1`, // quiz 첫번째 문제
+        pathname: `/quiz/${quiz.key}/0`, // quiz 첫번째 문제
         state: {
           userName: userName,
           quizName: quiz.name,
