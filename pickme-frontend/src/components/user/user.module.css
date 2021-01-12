@@ -1,0 +1,53 @@
+@value makerGreen, makerWhite, makerLightGrey, makerBlack from '../../common/colors.css';
+
+.user {
+  overflow-y: auto;
+  height: 100%;
+  background-color: makerLightGrey;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 0em;
+  color: makerGreen;
+}
+
+.link {
+  width: 100%;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  flex-direction: column;
+}
+
+.input {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+}
+
+.copyButton {
+  height: 2.5em;
+  font-size: 1.2rem;
+  background-color: makerGreen;
+  color: makerWhite;
+  cursor: pointer;
+  border: 0.2rem solid makerGreen;
+  outline: 0;
+  border-radius: 1.2rem;
+}
+
+.copyButton:hover {
+  background-color: makerLightGrey;
+  color: makerBlack;
+}

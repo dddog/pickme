@@ -21,9 +21,12 @@ const User = ({ match, apiService }) => {
       <h1 className={styles.title}>
         {userName}님의 {quizName} 링크 공유하기
       </h1>
-      <div>
-        <input value={`http://localhost:3000/test/${userId}/${quizId}`} />
-        <button>링크 복사하기</button>
+      <div className={styles.link}>
+        <input
+          className={styles.input}
+          value={`http://localhost:3000/test/${userId}/${quizId}`}
+        />
+        <button className={styles.copyButton}>링크 복사하기</button>
       </div>
     </section>
   );
