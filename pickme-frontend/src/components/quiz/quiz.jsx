@@ -30,10 +30,18 @@ const Quiz = ({ match, apiService }) => {
     setResults(r);
     // console.log(`selected : ${selectedPickNo},  results : ${results}, length : ${results.length}`);
     if (results.length === totalCnt) {
-      history.push({
-        pathname: `/user`,
+      // console.log(`quizId : ${quizId}, results : ${results}`);
+      const newUserKey = apiService.pushUserResult({
+        name: userName,
+        quizId: quizId,
+        results: results,
       });
-      return;
+      newUserKey.then((key) => {
+        // console.log(`newUserKey>>>${key}`);
+        history.push({
+          pathname: `/user/${key.newUserKey}/${quizId}`,
+        });
+      });
     } else {
       const pickNo = selectedPickNo;
       setSelectedPickNo(pickNo + 1);

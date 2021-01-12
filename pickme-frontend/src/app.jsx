@@ -24,9 +24,12 @@ function App({ apiService }) {
                 <Quiz apiService={apiService} match={match} />
               )}
             ></Route>
-            <Route path="/user">
-              <User />
-            </Route>
+            <Route
+              path="/user/:userId/:quizId"
+              component={({ match }) => (
+                <User apiService={apiService} match={match} />
+              )}
+            ></Route>
           </Switch>
         </BrowserRouter>
         <Footer />
