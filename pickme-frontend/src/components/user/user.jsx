@@ -7,6 +7,7 @@ const User = ({ match, apiService }) => {
   const { userId, quizId } = match.params;
   const [userName, setUserName] = useState("");
   const [quizName, setQuizName] = useState("");
+  const [scoreList, setScoreList] = useState([]);
 
   const [cookies, setCookie] = useCookies(["userId"]);
 
@@ -14,6 +15,7 @@ const User = ({ match, apiService }) => {
     const user = apiService.getUser(userId);
     user.then((user) => {
       setUserName(user.name);
+      setScoreList(Object.values(user.scoreList));
     });
     const quiz = apiService.getQuiz();
     quiz.then((quiz) => {
@@ -46,7 +48,23 @@ const User = ({ match, apiService }) => {
           </div>
         </>
       )}
-      <Score userName={userName} />
+      <div>
+        <h1 className={styles.title}>누가 {userName}님을 가장 잘 알까요?</h1>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th>이름</th>
+              <th>점수</th>
+            </tr>
+          </thead>
+          <tbody>
+            {scoreList.map((score) => {
+              return <Score name={score.name} score={score.score} />;
+            })}
+          </tbody>
+        </table>
+      </div>
+      <Score />
     </section>
   );
 };

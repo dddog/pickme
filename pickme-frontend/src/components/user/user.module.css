@@ -51,3 +51,17 @@
   background-color: makerLightGrey;
   color: makerBlack;
 }
+
+.table {
+  width: 100%;
+  padding: 0 1em;
+}
+.table th {
+  background-color: makerGreen;
+  color: makerWhite;
+}
+.table td {
+  border: 1px solid makerBlack;
+  background-color: makerWhite;
+  text-align: center;
+}
