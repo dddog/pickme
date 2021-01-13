@@ -43,10 +43,13 @@ class ApiService {
 
     var raw = JSON.stringify({
       name: user.name,
-      quizList: {
-        quizId: user.quizId,
-        result: user.results,
-      },
+      quizList: [
+        {
+          quizId: user.quizId,
+          result: user.results,
+          scoreList: [],
+        },
+      ],
     });
 
     var requestOptions = {

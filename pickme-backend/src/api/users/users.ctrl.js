@@ -29,3 +29,15 @@ exports.push = (ctx) => {
     ctx.throw(e, 500);
   }
 };
+
+exports.scorePush = (ctx) => {
+  try {
+    const { userId } = ctx.params;
+    const score = ctx.request.body;
+    const usersRef = firebaseDatabase.ref(`users/${userId}`);
+    const newScoreRef = usersRef.child("scoreList").push(score);
+    ctx.body = { newScoreKey: newScoreRef.key };
+  } catch (e) {
+    ctx.throw(e, 500);
+  }
+};
