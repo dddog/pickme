@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import Pick from "../pick/pick";
 import styles from "./quiz.module.css";
 
@@ -12,6 +13,7 @@ const Quiz = ({ match, apiService }) => {
   const [selectedPickNo, setSelectedPickNo] = useState(0);
   const [results, setResults] = useState([]);
   const [images, setImages] = useState([]);
+  const [cookies, setCookie] = useCookies([]);
 
   const { quizId } = match.params;
   useEffect(() => {
@@ -38,6 +40,7 @@ const Quiz = ({ match, apiService }) => {
       });
       newUserKey.then((key) => {
         // console.log(`newUserKey>>>${key}`);
+        setCookie("userId", key.newUserKey, { maxAge: 36000000 });
         history.push({
           pathname: `/user/${key.newUserKey}/${quizId}`,
         });
