@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useCookies } from "react-cookie";
 import Score from "../score/score";
 import styles from "./user.module.css";
@@ -11,17 +11,32 @@ const User = ({ match, apiService }) => {
 
   const [cookies, setCookie] = useCookies(["userId"]);
 
+  const linkInputRef = useRef();
+
+  const onClickCopy = () => {
+    const tempElem = document.createElement("textarea");
+    tempElem.value = linkInputRef.current.value;
+    document.body.appendChild(tempElem);
+
+    tempElem.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempElem);
+
+    alert("복사완료! 친구들에게 공유해보세요.");
+  };
+
   useEffect(() => {
     const user = apiService.getUser(userId);
     user.then((user) => {
       setUserName(user.name);
-      setScoreList(Object.values(user.scoreList));
+      setScoreList(user.scoreList ? Object.values(user.scoreList) : []);
     });
     const quiz = apiService.getQuiz();
     quiz.then((quiz) => {
       setQuizName(quiz.name);
     });
   }, [apiService, userId]);
+
   return (
     <section className={styles.user}>
       {cookies.userId === userId && (
@@ -31,10 +46,13 @@ const User = ({ match, apiService }) => {
           </h1>
           <div className={styles.link}>
             <input
-              className={styles.input}
+              ref={linkInputRef}
+              className={styles.linkInput}
               value={`http://localhost:3000/user/${userId}/${quizId}`}
             />
-            <button className={styles.copyButton}>링크 복사하기</button>
+            <button className={styles.copyButton} onClick={onClickCopy}>
+              링크 복사하기
+            </button>
           </div>
         </>
       )}
@@ -43,7 +61,15 @@ const User = ({ match, apiService }) => {
           <h1 className={styles.title}>
             {userName}님의 {quizName} 맞춰보기
           </h1>
-          <div className={styles.link}>
+          <div className={styles.inputList}>
+            <span className={styles.span}>별명</span>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="별명을 입력하세요"
+            />
+          </div>
+          <div className={styles.testContent}>
             <button className={styles.copyButton}>시작하기</button>
           </div>
         </>
