@@ -13,7 +13,7 @@ const Quiz = ({ match, apiService }) => {
   const [selectedPickNo, setSelectedPickNo] = useState(0);
   const [results, setResults] = useState([]);
   const [images, setImages] = useState([]);
-  const [cookies, setCookie] = useCookies([]);
+  const [, setCookie] = useCookies([]);
 
   const { quizId } = match.params;
   useEffect(() => {

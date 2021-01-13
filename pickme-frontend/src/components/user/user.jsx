@@ -9,7 +9,7 @@ const User = ({ match, apiService }) => {
   const [quizName, setQuizName] = useState("");
   const [scoreList, setScoreList] = useState([]);
 
-  const [cookies, setCookie] = useCookies(["userId"]);
+  const [cookies] = useCookies(["userId"]);
 
   const linkInputRef = useRef();
 
@@ -49,6 +49,7 @@ const User = ({ match, apiService }) => {
               ref={linkInputRef}
               className={styles.linkInput}
               value={`http://localhost:3000/user/${userId}/${quizId}`}
+              readOnly
             />
             <button className={styles.copyButton} onClick={onClickCopy}>
               링크 복사하기
@@ -76,19 +77,25 @@ const User = ({ match, apiService }) => {
       )}
       <div>
         <h1 className={styles.title}>누가 {userName}님을 가장 잘 알까요?</h1>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>이름</th>
-              <th>점수</th>
-            </tr>
-          </thead>
-          <tbody>
-            {scoreList.map((score) => {
-              return <Score name={score.name} score={score.score} />;
-            })}
-          </tbody>
-        </table>
+        {scoreList.length > 0 ? (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>이름</th>
+                <th>점수</th>
+              </tr>
+            </thead>
+            <tbody>
+              {scoreList.map((score, index) => {
+                return (
+                  <Score name={score.name} score={score.score} key={index} />
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <></>
+        )}
       </div>
       <Score />
     </section>
